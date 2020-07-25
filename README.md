@@ -1,7 +1,7 @@
 
   
 
-# Express-Mongo boilerplate
+# Embrace API
 
   
 
