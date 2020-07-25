@@ -1,0 +1,43 @@
+version: '2'
+# NOTE: move this answer file up a directory so it'll work
+
+services:
+
+  express:
+    container_name: express
+    networks: 
+      - backend
+    environment:
+      DB_PORT: 27017
+      DB_NAME: express_boilerplate
+      DB_USER: 
+      DB_PASS: 
+      DB_HOST: mongo
+
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - '8081:5000'
+    expose: 
+      - '8081'
+    volumes:
+       - ./:/app
+    depends_on:
+      - mongo
+
+  mongo:
+    container_name: mongoDB
+    image: mongo:latest
+    networks: 
+      - backend
+    volumes:
+      - db-data:/data/db
+      - mongo-config:/data/configdb
+
+networks:
+  backend:
+
+volumes:
+  db-data:
+  mongo-config:
